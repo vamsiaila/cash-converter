@@ -1,4 +1,4 @@
-# verify-jwt
+# Cash Converter
 
 updated soon
 
@@ -11,7 +11,7 @@ updated soon
 
 
 ```
-npm install verify-jwt
+npm install cash-converter
 ```
 
 
