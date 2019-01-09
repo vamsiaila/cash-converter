@@ -16,10 +16,9 @@ module.exports = {
             if(transformTo === 'string'){
                 let strArr = str.split(' ');
                 strArr = strArr.filter(Boolean);
-                console.log(strArr);
                 let values = strArr.filter(x=> x.indexOf('$')>-1 || x.indexOf('¢')>-1);
                 if(values.length){
-                    let finalString='';
+                    let finalString=str;
                     for(let i=0; i<values.length; i++){
                         if(values[i].indexOf('$') > -1){
                             if(values[i].length > 1){
