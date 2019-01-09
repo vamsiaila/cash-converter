@@ -1,6 +1,6 @@
 {
   "name": "cash-converter",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,11 @@
   },
 
   "keywords": [
-    "cash-convertor"
+    "cash-convertor",
+    "currency converter",
+    "transform string",
+    "transform currency values",
+    "currency"
   ]
 }
 

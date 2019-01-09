@@ -1,14 +1,18 @@
 module.exports = {
-    symbol2string : (value)=>{
-        if(value.indexOf('$')>-1){
-            let arr = value.split('$');
+    symbol2string : (str)=>{
+        if(str.indexOf('$')>-1){
+            let arr = str.split('$');
             let price = arr[0] === '' ? arr[1] : arr[0];
             return `${price} USD`
-        } else if(value.indexOf('¢')>-1){
-            let arr = value.split('¢');
+        } else if(str.indexOf('¢')>-1){
+            let arr = str.split('¢');
             let price = arr[0] === '' ? arr[1] : arr[0];
             return `${price} CENT`
         }
+    },
+
+    string2symbol : (str)=>{
+
     },
 
     transformString : (str,transformTo)=>{
