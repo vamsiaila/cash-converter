@@ -21,6 +21,16 @@ module.exports = {
                 let strArr = str.split(' ');
                 strArr = strArr.filter(Boolean);
                 let values = strArr.filter(x=> x.indexOf('$')>-1 || x.indexOf('¢')>-1);
+                function divideAndJoin(price){
+                    let priceInt = parseInt(price);
+                    let centString = '';
+                    if(price.indexOf('.')>-1) {
+                        let priceArr = price.split('.');
+                        let centValue = parseInt(priceArr[1]);
+                        centString = `${centValue} ${centValue > 1 ? 'cents' : 'cent'}`;
+                    }
+                    return `${priceInt} ${priceInt > 1 ? 'dollars' : 'dollar'} ${centString}`;
+                }
                 if(values.length){
                     let finalString=str;
                     for(let i=0; i<values.length; i++){
@@ -29,20 +39,17 @@ module.exports = {
                                 let arr = values[i].split('$');
                                 let price = arr[0] === '' ? arr[1] : arr[0];
                                 let n = strArr.indexOf(values[i]);
-                                let priceInt = parseInt(price);
-                                strArr[n] = `${price} ${priceInt > 1 ? 'dollars' : 'dollar'}`;
+                                strArr[n] = divideAndJoin(price);
                                 finalString = strArr.join(' ');
                             }else {
                                 let n = strArr.indexOf(values[i]);
                                 let front = parseInt(strArr[n+1]);
                                 let back = parseInt(strArr[n-1]);
                                 if(front){
-                                    strArr[n] = strArr[n+1];
-                                    strArr[n+1] = front > 1 ? 'dollars' : 'dollar';
+                                    strArr[n+1] = divideAndJoin(strArr[n+1]);
                                     finalString =  strArr.join(' ');
                                 }else if(back){
-                                    strArr[n] = back > 1 ? 'dollars' : 'dollar';
-                                    strArr[n-1] = strArr[n-1];
+                                    strArr[n-1] = divideAndJoin(strArr[n-1]);
                                     finalString =  strArr.join(' ');
                                 }else{
                                     finalString =  strArr.join(' ');
