@@ -28,7 +28,8 @@ module.exports = {
                     if(price.indexOf('.')>-1) {
                         let priceArr = price.split('.');
                         let centValue = parseInt(priceArr[1]);
-                        centString = `${dollarString ? 'and ' : ''} ${centValue != 0 ? centValue + (centValue > 1 ? ' cents' : ' cent') : ''}`;
+                        centValue = priceArr[1].length > 1 ? centValue : centValue+'0';
+                        centString = `${dollarString && parseInt(priceArr[1]) > 0? 'and ' : ''}${centValue != 0 ? centValue + (centValue > 1 ? ' cents' : ' cent') : ''}`;
                     }
                     if(!dollarString && !centString) return 'nothing';
                     return `${dollarString} ${centString}`;
