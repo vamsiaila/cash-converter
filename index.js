@@ -24,12 +24,14 @@ module.exports = {
                 function divideAndJoin(price){
                     let priceInt = parseInt(price);
                     let centString = '';
+                    let dollarString = `${priceInt != 0 ? priceInt + (priceInt > 1 ? ' dollars' : ' dollar') : ''}`
                     if(price.indexOf('.')>-1) {
                         let priceArr = price.split('.');
                         let centValue = parseInt(priceArr[1]);
-                        centString = `${centValue} ${centValue > 1 ? 'cents' : 'cent'}`;
+                        centString = `${centValue != 0 ? centValue + (centValue > 1 ? ' cents' : ' cent') : ''}`;
                     }
-                    return `${priceInt} ${priceInt > 1 ? 'dollars' : 'dollar'} ${centString}`;
+                    if(!dollarString && !centString) return 'nothing';
+                    return `${dollarString} ${centString}`;
                 }
                 if(values.length){
                     let finalString=str;
@@ -45,11 +47,13 @@ module.exports = {
                                 let n = strArr.indexOf(values[i]);
                                 let front = parseInt(strArr[n+1]);
                                 let back = parseInt(strArr[n-1]);
-                                if(front){
+                                if(front || front === 0){
                                     strArr[n+1] = divideAndJoin(strArr[n+1]);
+                                    delete strArr[n];
                                     finalString =  strArr.join(' ');
-                                }else if(back){
+                                }else if(back || back === 0){
                                     strArr[n-1] = divideAndJoin(strArr[n-1]);
+                                    delete strArr[n];
                                     finalString =  strArr.join(' ');
                                 }else{
                                     finalString =  strArr.join(' ');
